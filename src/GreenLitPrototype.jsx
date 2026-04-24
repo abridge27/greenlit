@@ -467,6 +467,24 @@ export default function GreenLitPrototype() {
     </div>
   );
 
+  // ── Beta banner (shared, shown on all pages except celebrating) ──────────
+  const BetaBanner = () => (
+    <div style={{
+      width: "100%",
+      background: G.amberDim,
+      borderBottom: `0.5px solid rgba(146,64,14,0.15)`,
+      padding: "7px 16px",
+      textAlign: "center",
+    }}>
+      <p style={{
+        fontFamily: G.mono, fontSize: 10, color: G.amber,
+        letterSpacing: 0.8, lineHeight: 1,
+      }}>
+        ⚠ Beta Mode: This app is under construction. Not all features are live.
+      </p>
+    </div>
+  );
+
   // ── Library modal (shared) ────────────────────────────────────────────────
   const LibraryModal = () => (
     <div style={{
@@ -528,6 +546,8 @@ export default function GreenLitPrototype() {
           ))}
         </div>
       </div>
+
+      <BetaBanner />
 
       {/* Hero */}
       <div style={{ maxWidth: 640, margin: "0 auto", padding: `${isMobile ? 40 : 72}px ${P}px 0`, textAlign: "center" }}>
@@ -614,8 +634,10 @@ export default function GreenLitPrototype() {
 
   // ── PHASE: DASHBOARD ──────────────────────────────────────────────────────
   if (phase === "dashboard") return (
-    <div style={{ background: G.bg, minHeight: "100vh", fontFamily: G.sans, color: G.text, padding: `28px ${P}px`, maxWidth: 720, margin: "0 auto" }}>
+    <div style={{ background: G.bg, minHeight: "100vh", fontFamily: G.sans, color: G.text, maxWidth: 720, margin: "0 auto" }}>
       {fonts}
+      <BetaBanner />
+      <div style={{ padding: `28px ${P}px` }}>
       <NavBar back="Home" onBack={() => setPhase("entry")} />
 
       <Label>Your workspace</Label>
@@ -675,6 +697,7 @@ export default function GreenLitPrototype() {
           ))}
         </div>
       )}
+      </div>
     </div>
   );
 
@@ -714,6 +737,8 @@ export default function GreenLitPrototype() {
           ))}
         </div>
       </div>
+
+      <BetaBanner />
 
       {/* Hero */}
       <div style={{ maxWidth: 680, margin: "0 auto", padding: `${isMobile ? 36 : 56}px ${P}px 0` }}>
@@ -795,11 +820,9 @@ export default function GreenLitPrototype() {
 
   // ── PHASE: PERSONA ────────────────────────────────────────────────────────
   if (phase === "persona") return (
-    <div style={{
-      background: G.bg, minHeight: "100vh", fontFamily: G.sans,
-      color: G.text, padding: `28px ${P}px`,
-      maxWidth: 560, margin: "0 auto",
-    }}>
+    <div style={{ background: G.bg, minHeight: "100vh", fontFamily: G.sans, color: G.text }}>
+      <BetaBanner />
+    <div style={{ padding: `28px ${P}px`, maxWidth: 560, margin: "0 auto" }}>
       {fonts}
       <NavBar back="Lobby" onBack={() => setPhase("lobby")} />
 
@@ -871,13 +894,15 @@ export default function GreenLitPrototype() {
         <GhostBtn onClick={() => setPhase("lobby")}>Back</GhostBtn>
       </div>
     </div>
+    </div>
   );
 
   // ── PHASE: PROJECT TYPE ───────────────────────────────────────────────────
   if (phase === "project-type") return (
+    <div style={{ background: G.bg, minHeight: "100vh", fontFamily: G.sans, color: G.text }}>
+      <BetaBanner />
     <div style={{
-      background: G.bg, minHeight: "100vh", fontFamily: G.sans,
-      color: G.text, padding: `28px ${P}px`,
+      padding: `28px ${P}px`,
       maxWidth: 560, margin: "0 auto",
     }}>
       {fonts}
@@ -927,15 +952,14 @@ export default function GreenLitPrototype() {
         <GhostBtn onClick={() => setPhase("lobby")}>Back</GhostBtn>
       </div>
     </div>
+    </div>
   );
 
   // ── PHASE: SURVEY ─────────────────────────────────────────────────────────
   if (phase === "survey") return (
-    <div style={{
-      background: G.bg, minHeight: "100vh", fontFamily: G.sans,
-      color: G.text, padding: `28px ${P}px`,
-      maxWidth: 600, margin: "0 auto",
-    }}>
+    <div style={{ background: G.bg, minHeight: "100vh", fontFamily: G.sans, color: G.text }}>
+      <BetaBanner />
+    <div style={{ padding: `28px ${P}px`, maxWidth: 600, margin: "0 auto" }}>
       {fonts}
       <NavBar back="Project type" onBack={() => setPhase("project-type")} />
 
@@ -998,15 +1022,14 @@ export default function GreenLitPrototype() {
         <GhostBtn onClick={() => setPhase("project-type")}>Back</GhostBtn>
       </div>
     </div>
+    </div>
   );
 
   // ── PHASE: WORKSPACE ──────────────────────────────────────────────────────
   if (phase === "workspace") return (
-    <div style={{
-      background: G.bg, minHeight: "100vh", fontFamily: G.sans,
-      color: G.text, padding: `28px ${P}px`,
-      maxWidth: 680, margin: "0 auto",
-    }}>
+    <div style={{ background: G.bg, minHeight: "100vh", fontFamily: G.sans, color: G.text }}>
+      <BetaBanner />
+    <div style={{ padding: `28px ${P}px`, maxWidth: 680, margin: "0 auto" }}>
       {fonts}
 
       {/* Header row */}
@@ -1215,6 +1238,7 @@ export default function GreenLitPrototype() {
 
       {showLibrary && <LibraryModal />}
     </div>
+    </div>
   );
 
   // ── PHASE: ANALYZING ─────────────────────────────────────────────────────
@@ -1243,6 +1267,7 @@ export default function GreenLitPrototype() {
             GREENLIT
           </div>
         </div>
+        <BetaBanner />
 
         {/* Centered stage */}
         <div style={{
@@ -1571,13 +1596,14 @@ export default function GreenLitPrototype() {
     return (
       <div style={{
         background: G.bg, minHeight: "100vh", fontFamily: G.sans,
-        color: G.text, padding: `28px ${P}px`,
-        maxWidth: 640, margin: "0 auto",
+        color: G.text,
       }}>
         {fonts}
         <style>{`
           @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         `}</style>
+        <BetaBanner />
+        <div style={{ padding: `28px ${P}px`, maxWidth: 640, margin: "0 auto" }}>
 
         <NavBar back="Workspace" onBack={() => setPhase("workspace")} />
 
@@ -1954,6 +1980,7 @@ export default function GreenLitPrototype() {
             </div>
           </div>
         )}
+        </div>{/* end inner padded div */}
       </div>
     );
   }
