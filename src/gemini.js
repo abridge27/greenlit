@@ -173,7 +173,7 @@ export async function analyzeAudio(file) {
       }],
       generationConfig: {
         temperature: 0.2,      // low temp = consistent, factual analysis
-        maxOutputTokens: 32768,
+        maxOutputTokens: 65536, // bumped — 5 levels × 8 elements generates ~40k tokens
       },
     }),
   });
@@ -201,12 +201,14 @@ export async function analyzeAudio(file) {
     throw new Error(`No response from Gemini${reason}.`);
   }
 
-  // Strip any stray markdown fences just in case
-  const clean = text.replace(/```json[\s\S]*?```|```/g, "").trim();
+  // Strip markdown fences (model sometimes wraps output despite instructions)
+  const clean = text.replace(/```json|```/g, "").trim();
 
   try {
     return JSON.parse(clean);
   } catch {
-    throw new Error("Gemini returned invalid JSON — the response may have been cut off. Raw: " + text.slice(0, 300));
+    // Response likely truncated mid-JSON — surface something actionable
+    const snippet = clean.slice(0, 200).replace(/\n/g, " ");
+    throw new Error(`Analysis response was cut off before completing. Try a shorter track (under 3 min) or wait 30s and retry. (Raw: ${snippet}…)`);
   }
 }
