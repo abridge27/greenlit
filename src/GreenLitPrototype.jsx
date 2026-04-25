@@ -271,6 +271,15 @@ export default function GreenLitPrototype() {
       alert("Please upload an .mp3 or .wav file only.");
       return;
     }
+    const sizeMB = file.size / 1024 / 1024;
+    if (ext === "wav" && sizeMB > 50) {
+      alert(`This WAV file is ${sizeMB.toFixed(0)}MB — too large for analysis.\n\nExport it as an MP3 first (320kbps is fine) and re-upload. MP3s under 50MB work great.`);
+      return;
+    }
+    if (sizeMB > 150) {
+      alert(`This file is ${sizeMB.toFixed(0)}MB — too large for analysis.\n\nTry exporting as an MP3 (320kbps) and re-uploading.`);
+      return;
+    }
     setUploading(true);
     setUploadProgress(0);
     let progress = 0;
@@ -570,7 +579,7 @@ export default function GreenLitPrototype() {
           </p>
           <GreenBtn style={{ fontSize: 12, padding: "10px 20px" }}>Add to library</GreenBtn>
           <p style={{ fontFamily: G.mono, fontSize: 10, color: G.text3, marginTop: 14 }}>
-            .mp3 or .wav only
+            .mp3 recommended · .wav under 50MB
           </p>
         </div>
         <p style={{ fontFamily: G.mono, fontSize: 10, color: G.text3, textAlign: "center" }}>
@@ -1242,7 +1251,7 @@ export default function GreenLitPrototype() {
             </GhostBtn>
           </div>
           <p style={{ fontFamily: G.mono, fontSize: 10, color: G.text3 }}>
-            .mp3 or .wav only
+            .mp3 recommended · .wav under 50MB
           </p>
         </div>
       )}
