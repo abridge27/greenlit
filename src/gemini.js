@@ -180,20 +180,33 @@ export async function analyzeAudio(file) {
 
   if (!response.ok) {
     const err = await response.json().catch(() => ({}));
-    throw new Error(err?.error?.message || `Gemini API error: ${response.status}`);
+    const status = response.status;
+    if (status === 429) throw new Error("Rate limit hit — wait a moment and try again.");
+    if (status === 413) throw new Error("Audio file too large for the API. Try a shorter clip (under 10 minutes).");
+    throw new Error(err?.error?.message || `Gemini API error: ${status}`);
   }
 
   const data = await response.json();
-  const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+  const candidate = data?.candidates?.[0];
+  const finishReason = candidate?.finishReason;
+  const text = candidate?.content?.parts?.[0]?.text;
 
-  if (!text) throw new Error("No response from Gemini.");
+  // Detect truncated response (ran out of output tokens)
+  if (finishReason === "MAX_TOKENS") {
+    throw new Error("Response was cut off (too long). The analysis prompt is very detailed — try a shorter track if this keeps happening.");
+  }
+
+  if (!text) {
+    const reason = finishReason ? ` (finishReason: ${finishReason})` : "";
+    throw new Error(`No response from Gemini${reason}.`);
+  }
 
   // Strip any stray markdown fences just in case
-  const clean = text.replace(/```json|```/g, "").trim();
+  const clean = text.replace(/```json[\s\S]*?```|```/g, "").trim();
 
   try {
     return JSON.parse(clean);
   } catch {
-    throw new Error("Gemini returned invalid JSON. Raw response: " + text.slice(0, 200));
+    throw new Error("Gemini returned invalid JSON — the response may have been cut off. Raw: " + text.slice(0, 300));
   }
 }

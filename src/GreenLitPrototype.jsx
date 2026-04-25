@@ -110,6 +110,59 @@ const MOCK_GEMINI = {
     4: "The chorus is legitimately great — 7.8 hook strength backed by a vocal performance that earns it. But the verse arrangement is underperforming. You've got 44 seconds building to something and the tension isn't being used intentionally enough. The outro is the weakest part of an otherwise strong track — it fades when it should land. Push harder here. You're close.",
     5: "Okay. Real talk. That chorus melody? Genuinely the best thing you've done in recent memory. The hook sticks, the harmonies are stacked right, and the vocal tone is undeniable. But the 808 is eating your mix for breakfast and nobody told it to stop. The verse arrangement is marking time — you built a runway and didn't use it. And that outro? It just stops. Like you ran out of ideas at the finish line. You've got a great song hiding inside a good demo. Go find it.",
   },
+  // Fallback elementBreakdown shown when Gemini API is unavailable
+  elementBreakdown: {
+    1: [
+      { element: "Arrangement", note: "The way this track breathes and builds is genuinely special. Every section earns its place." },
+      { element: "Vocal Performance", note: "The vocal tone here is distinctive — there's real emotional intelligence in the delivery." },
+      { element: "Melody", note: "That hook is memorable. It's the kind of melody that stays with you long after the track ends." },
+      { element: "Harmonies & Layers", note: "The layering adds real depth without cluttering the space. Beautiful restraint." },
+      { element: "Rhythm & Groove", note: "The rhythmic feel is locked in. It moves in exactly the right way for this genre." },
+      { element: "Instrumentation", note: "Every sound serves the song. The palette is cohesive and intentional." },
+      { element: "Atmosphere & Texture", note: "The sonic world here is fully realized. You step into it immediately." },
+      { element: "Production & Mix", note: "The production choices show real taste. This sounds like an artist who knows what they want." },
+    ],
+    2: [
+      { element: "Arrangement", note: "The structure flows really naturally — the sections feel earned. One thought: the outro might have room for one more moment of release." },
+      { element: "Vocal Performance", note: "Emotionally compelling delivery throughout. The chorus hits especially hard. One idea: the verse dynamics could play even more with intimacy vs. power." },
+      { element: "Melody", note: "Strong melodic writing — the hook has real staying power. You might explore pushing the bridge melody even further from the verse." },
+      { element: "Harmonies & Layers", note: "The harmony choices are tasteful and add real dimension. Could explore adding a wider interval somewhere in the chorus for extra lift." },
+      { element: "Rhythm & Groove", note: "The groove is consistent and serves the track well. An option to explore: a subtle rhythmic variation in the second verse to keep the ear engaged." },
+      { element: "Instrumentation", note: "Well-chosen sounds that work cohesively. One thing to consider: a new textural element in the bridge could reward a second listen." },
+      { element: "Atmosphere & Texture", note: "The atmospheric world you've built is immersive. You might experiment with a moment of stark contrast somewhere to make the textures land harder." },
+      { element: "Production & Mix", note: "Solid production instincts throughout. The low end could use a touch more definition to really lock in the groove." },
+    ],
+    3: [
+      { element: "Arrangement", note: "The arrangement has strong bones — sections are clearly defined and the energy arc works. The outro, however, doesn't deliver on what the pre-chorus promises. Consider giving it a real landing moment rather than a fade." },
+      { element: "Vocal Performance", note: "The chorus vocal is the undeniable anchor of this track — emotionally present and well-executed. The verse delivery is more reserved, which works stylistically, but a few phrases feel slightly under-committed. More specificity in the storytelling would strengthen it." },
+      { element: "Melody", note: "The hook melody is genuinely strong and memorable. The verse melody does its job but stays fairly predictable in its phrasing. Introducing an unexpected interval or rhythmic displacement in the pre-chorus could make the hook hit even harder by contrast." },
+      { element: "Harmonies & Layers", note: "The harmony approach is tasteful and adds real dimension. The stacked vocals in the chorus work well. The verse harmonies are sparse — that's a deliberate choice — but a hidden third voice somewhere might add depth without calling attention to itself." },
+      { element: "Rhythm & Groove", note: "The groove is locked and appropriate for the genre. The half-time feel in the verse works. The transition into the chorus could use a more intentional rhythmic lift — right now it's a dynamic change without a real rhythmic event to mark it." },
+      { element: "Instrumentation", note: "Sound choices are cohesive and serve the track's mood. The Rhodes is doing a lot of work and earning it. The 808 and kick drum are competing in the low end — they need separation, either by frequency or by rhythmic placement." },
+      { element: "Atmosphere & Texture", note: "Strong atmospheric world. The reverb-heavy pads in the intro establish the emotional space well. The textures don't evolve much through the track — one new textural element introduced in the second verse or bridge would reward attentive listening." },
+      { element: "Production & Mix", note: "The bones of the mix are solid. Vocal sits well in the mid-range. The main issues are the low end (808 and kick competing around 60-80Hz) and the stereo field, which could be wider on the chorus to give it more size. Otherwise this is close to mixable." },
+    ],
+    4: [
+      { element: "Arrangement", note: "The arrangement structure is clear and the energy arc mostly works. But you've built a lot of runway in the verse and you're not using it intentionally enough. The outro is the weakest part of an otherwise strong track — it fades when it should land. That's a missed opportunity on a song this good." },
+      { element: "Vocal Performance", note: "The chorus vocal is legitimately great — emotionally committed, well-pitched, and the tone is distinctive. The verse feels like a different, less-present artist. The gap between your verse and chorus delivery is too wide. Close it, and this track becomes a different conversation." },
+      { element: "Melody", note: "The hook is strong and that's the foundation. The verse melody is too predictable — same phrasing structure, same rhythmic pattern, bar after bar. You have the melodic instinct to write surprises. Use it." },
+      { element: "Harmonies & Layers", note: "The chorus harmonies work and add dimension. The interval choices are safe — they blend well but they don't challenge anything. Somewhere in this track there's a dissonant or unexpected harmony that would make the resolution feel earned. Find it." },
+      { element: "Rhythm & Groove", note: "The groove is solid but it doesn't evolve. You're running the same rhythmic feel from verse through chorus with only a volume change to mark the transition. A real rhythmic event at the chorus — a drum fill, a pattern shift, a beat drop — would give the hook the launch it deserves." },
+      { element: "Instrumentation", note: "Sound palette is cohesive. The Rhodes is working overtime and doing it well. The 808 is eating your mix and nobody told it to stop. You need to sidechain it or EQ it out of the kick's territory. Right now the low end is a muddy competition and both elements are losing." },
+      { element: "Atmosphere & Texture", note: "The atmospheric world is well-established but static. You set it up in the intro and then just maintain it for the whole track. Great atmospheric production uses texture as a compositional tool — elements entering, leaving, mutating. Map out your texture changes bar by bar and be intentional." },
+      { element: "Production & Mix", note: "Technically the mix has real problems that need to be solved before this is release-ready. Low end competition between 808 and kick. Stereo field too narrow on the chorus. Vocal reverb tail is slightly too long and muddying the mid-range. All fixable — but don't confuse a good demo with a finished record." },
+    ],
+    5: [
+      { element: "Arrangement", note: "The arrangement is competent and the structure makes sense — that's the floor, not the ceiling. You built a full runway and delivered a decent takeoff. The outro is where I officially lost faith in you. It just stops. Like you ran out of ideas, looked at the clock, and decided 'good enough.' It's not. Finish the song." },
+      { element: "Vocal Performance", note: "Your chorus vocal is the reason anyone would play this twice. It's genuinely good — distinctive tone, emotional commitment, correct pitching. Your verse vocal sounds like someone doing an impression of you at 60% effort. The gap between them is embarrassing. If you sang the verses with the same presence as the chorus, this would be a different conversation entirely." },
+      { element: "Melody", note: "The hook melody earns its hook strength score — it sticks, it's well-constructed, it works. The verse melody is on autopilot. Same rhythm, same phrase length, same contour, bar after bar after bar. You have the ability to write the chorus. Apply it to the verses. Stop phoning it in." },
+      { element: "Harmonies & Layers", note: "The chorus harmonies are stacked correctly and they add dimension. Fine. Safe. The interval choices throughout are so conservative they're practically apologizing for existing. You've written a song with genuine emotional stakes — put some harmonic tension in it somewhere. A suspended chord, a dissonant second, anything that makes the resolution mean something." },
+      { element: "Rhythm & Groove", note: "The groove works. It's not exciting, it doesn't evolve, it won't make anyone lose their mind — but it works and it stays out of the way. The transition into the chorus has no rhythmic event. Just a volume increase. In a song built on tension and release, that's a wasted moment." },
+      { element: "Instrumentation", note: "The Rhodes is the MVP of this production and it knows it. The 808? The 808 is a problem. It's sitting in the same frequency territory as your kick and both are drowning. This isn't a style choice — this is a technical mistake that's undermining every other production decision you made. Fix it before you play this for anyone who matters." },
+      { element: "Atmosphere & Texture", note: "You nailed the opening atmosphere. Points. Then you ran the exact same texture for the entire track like you were afraid to touch it. Atmospheric production is not a set-it-and-forget-it decision. Your textures should move, breathe, open up and contract. Right now this sounds like someone who discovered reverb and decided one setting was enough for a whole song." },
+      { element: "Production & Mix", note: "The mix has three problems you cannot ignore: (1) Low end is a disaster — 808 and kick competing and both losing. (2) Stereo field is too narrow on the chorus, which should be the widest moment in the track. (3) The reverb on your vocals is half a beat too long and muddying your mid-range. None of this is hard to fix. All of it will be noticed by anyone who listens on real speakers." },
+    ],
+  },
 };
 
 // ── COMPONENT ──────────────────────────────────────────────────────────────────
@@ -1748,9 +1801,22 @@ export default function GreenLitPrototype() {
 
         {/* Error state */}
         {critiqueReady && geminiError && (
-          <div style={{ background: "rgba(255,69,69,0.1)", border: "0.5px solid rgba(255,69,69,0.3)", borderRadius: 12, padding: "16px 20px", marginBottom: 16 }}>
-            <p style={{ fontFamily: G.mono, fontSize: 11, color: G.danger, marginBottom: 6 }}>GEMINI ERROR — showing mock data</p>
-            <p style={{ fontSize: 13, color: G.text2 }}>{geminiError}</p>
+          <div style={{ background: "rgba(255,69,69,0.08)", border: "0.5px solid rgba(255,69,69,0.3)", borderRadius: 12, padding: "16px 20px", marginBottom: 20 }}>
+            <p style={{ fontFamily: G.mono, fontSize: 11, color: G.danger, marginBottom: 6, letterSpacing: 0.5 }}>
+              ⚠ ANALYSIS FAILED — preview mode
+            </p>
+            <p style={{ fontSize: 13, color: G.text2, lineHeight: 1.65, marginBottom: 14 }}>{geminiError}</p>
+            <button
+              onClick={startAnalysis}
+              style={{
+                background: "transparent", border: `0.5px solid rgba(255,69,69,0.4)`,
+                borderRadius: 8, padding: "8px 16px",
+                fontFamily: G.mono, fontSize: 11, color: G.danger, letterSpacing: 0.5,
+                cursor: "pointer",
+              }}
+            >
+              Try again →
+            </button>
           </div>
         )}
 
