@@ -272,12 +272,20 @@ export default function GreenLitPrototype() {
       return;
     }
     const sizeMB = file.size / 1024 / 1024;
-    if (ext === "wav" && sizeMB > 50) {
-      alert(`This WAV file is ${sizeMB.toFixed(0)}MB — too large for analysis.\n\nExport it as an MP3 first (320kbps is fine) and re-upload. MP3s under 50MB work great.`);
+    // Gemini inline_data limit is ~20MB total — base64 adds 33% so source must be under ~15MB
+    const MP3_LIMIT_MB  = 15;
+    const WAV_LIMIT_MB  = 15;
+
+    if (ext === "mp3" && sizeMB > MP3_LIMIT_MB) {
+      alert(`This MP3 is ${sizeMB.toFixed(1)}MB — a bit too large to send for analysis right now.\n\nTry trimming it to under 5 minutes, or export at 128kbps instead of 320kbps. Either gets it under the limit.`);
       return;
     }
-    if (sizeMB > 150) {
-      alert(`This file is ${sizeMB.toFixed(0)}MB — too large for analysis.\n\nTry exporting as an MP3 (320kbps) and re-uploading.`);
+    if (ext === "wav" && sizeMB > WAV_LIMIT_MB) {
+      alert(`This WAV file is ${sizeMB.toFixed(1)}MB — too large for analysis.\n\nExport it as an MP3 (128–320kbps) and re-upload. That'll bring it well under the limit.`);
+      return;
+    }
+    if (sizeMB > MP3_LIMIT_MB) {
+      alert(`This file is ${sizeMB.toFixed(1)}MB — too large for analysis.\n\nExport as an MP3 (128–320kbps) under 5 minutes and re-upload.`);
       return;
     }
     setUploading(true);
@@ -579,7 +587,7 @@ export default function GreenLitPrototype() {
           </p>
           <GreenBtn style={{ fontSize: 12, padding: "10px 20px" }}>Add to library</GreenBtn>
           <p style={{ fontFamily: G.mono, fontSize: 10, color: G.text3, marginTop: 14 }}>
-            .mp3 recommended · .wav under 50MB
+            .mp3 recommended · max 15MB · under 5 min
           </p>
         </div>
         <p style={{ fontFamily: G.mono, fontSize: 10, color: G.text3, textAlign: "center" }}>
@@ -1251,7 +1259,7 @@ export default function GreenLitPrototype() {
             </GhostBtn>
           </div>
           <p style={{ fontFamily: G.mono, fontSize: 10, color: G.text3 }}>
-            .mp3 recommended · .wav under 50MB
+            .mp3 recommended · max 15MB · under 5 min
           </p>
         </div>
       )}

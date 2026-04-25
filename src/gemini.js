@@ -154,29 +154,34 @@ export async function analyzeAudio(file) {
   const base64Audio = await fileToBase64(file);
   const mimeType    = file.type || (file.name.endsWith(".wav") ? "audio/wav" : "audio/mpeg");
 
-  const response = await fetch(API_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      contents: [{
-        parts: [
-          {
-            inline_data: {
-              mime_type: mimeType,
-              data: base64Audio,
-            },
-          },
-          {
-            text: ANALYSIS_PROMPT,
-          },
-        ],
-      }],
-      generationConfig: {
-        temperature: 0.2,      // low temp = consistent, factual analysis
-        maxOutputTokens: 65536, // bumped — 5 levels × 8 elements generates ~40k tokens
-      },
-    }),
-  });
+  // Pre-flight: base64 adds ~33% — warn if encoded payload is over 18MB
+  const estimatedMB = (base64Audio.length * 0.75) / 1024 / 1024;
+  if (estimatedMB > 18) {
+    throw new Error(`File is too large to send (${estimatedMB.toFixed(1)}MB encoded). Export as a shorter MP3 or at a lower bitrate (128kbps) and try again.`);
+  }
+
+  let response;
+  try {
+    response = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [{
+          parts: [
+            { inline_data: { mime_type: mimeType, data: base64Audio } },
+            { text: ANALYSIS_PROMPT },
+          ],
+        }],
+        generationConfig: {
+          temperature: 0.2,
+          maxOutputTokens: 65536,
+        },
+      }),
+    });
+  } catch (networkErr) {
+    // fetch() itself threw — request never completed (too large, timeout, offline)
+    throw new Error("Could not reach the analysis server — the file may be too large to send, or your connection dropped. Try a smaller MP3 and retry.");
+  }
 
   if (!response.ok) {
     const err = await response.json().catch(() => ({}));
